@@ -1,0 +1,126 @@
+:root {
+    --primary: #4b9ce2;
+    --secondary: #f2f2f2;
+    --accent: #ffffff;
+    --radius: 1rem;
+    --shadow: 0 4px 12px rgba(0,0,0,0.1);
+    --padding: 1rem;
+  }
+  
+  html {
+    font-size: clamp(14px, 1.2vw, 18px);
+  }
+  
+  body {
+    margin: 0;
+    font-family: sans-serif;
+    background: var(--secondary);
+    color: #333;
+  }
+  
+  .container {
+    display: grid;
+    grid-template-areas:
+      "header"
+      "content"
+      "footer";
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+  }
+  
+  header {
+    grid-area: header;
+    background: var(--primary);
+    color: var(--accent);
+    padding: var(--padding);
+    text-align: center;
+    position: relative;
+  }
+  
+  header h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+  }
+  
+  .content {
+    grid-area: content;
+    padding: var(--padding);
+    display: grid;
+    gap: 2rem;
+  }
+  
+  .profiles {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 1rem;
+    padding: 1rem;
+    scroll-padding-inline: 1rem;
+    scrollbar-width: none;
+  }
+  
+  .profiles .card {
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+    min-width: 250px;
+    background: white;
+    border-radius: var(--radius);
+    padding: var(--padding);
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: transform 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    will-change: transform;
+    contain: layout style;
+  }
+  
+  .card:hover {
+    transform: scale(1.02);
+    filter: brightness(1.05);
+  }
+  
+  .card img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  
+  footer {
+    grid-area: footer;
+    text-align: center;
+    background: #ddd;
+    padding: 1rem;
+    position: relative;
+  }
+  
+  .masked-banner {
+    height: 100px;
+    background: url('https://picsum.photos/1000/300') center/cover no-repeat;
+    mask-image: linear-gradient(to bottom, black, transparent);
+  }
+  
+  @media (max-width: 600px) {
+    header h1 {
+      font-size: 1.8rem;
+    }
+    .card {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+  
+  .profile-container {
+    container: inline-size;
+  }
+  
+  @container (min-width: 600px) {
+    .card {
+      flex-direction: row;
+    }
+  }
+  
