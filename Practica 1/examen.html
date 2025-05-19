@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./estilos.css">
+    <title>EXAMEN FIS - DESARROLLO WEB</title>
+</head>
+<body>
+    <div class="contenedor-principal">
+        <div class="panel-izquierdo">
+            <canvas id="canvas" width="500" height="500"></canvas>
+            <div class="circulo-centro" onclick="girar()">
+                <p class="boton-girar">haz clic para girarlo</p>
+                <div class="triangulo"></div>
+            </div>
+        </div>
+        
+        <div class="panel-derecho">
+            <div class="area-elementos">
+                <textarea id="textarea" rows="12" cols="30" onchange="crearRueda()">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12</textarea>
+            </div>
+            
+            <div class="controles">
+                <div class="botones-principales">
+                    <button id="iniciar" class="btn-iniciar" onclick="girar()">Iniciar</button>
+                    <button id="reiniciar" class="btn-reiniciar" onclick="reiniciar()">Reiniciar</button>
+                </div>
+                
+                <div class="botones-secundarios">
+                    <button onclick="cambiarTitulo()" class="btn-titulo">Título</button>
+                    <button onclick="editarElementos()" class="btn-editar">Editar</button>
+                    <button onclick="esconderElementos()" class="btn-esconder">esconder...</button>
+                </div>
+                
+                <div class="atajos-teclado">
+                    <div class="atajo">
+                        <span class="tecla">SPACE</span> Giralo
+                    </div>
+                    <div class="atajo">
+                        <span class="tecla">S</span> Ocultar el elemento seleccionado
+                    </div>
+                    <div class="atajo">
+                        <span class="tecla">R</span> Reiniciar
+                    </div>
+                    <div class="atajo">
+                        <span class="tecla">E</span> Editar
+                    </div>
+                    <div class="atajo">
+                        <span class="tecla">F</span> Pantalla completa
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="encabezado" style="display: none;">
+        <h1 id="titulo">EXAMEN FIS - DESARROLLO WEB</h1>
+        <p id="ganador">Girar la ruleta</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
