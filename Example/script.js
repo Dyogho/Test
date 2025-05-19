@@ -1,15 +1,24 @@
-document.getElementById('generateButton').addEventListener('click', function() {
-    const participantsInput = document.getElementById('participants').value;
+document.getElementById('generateButton').addEventListener('click', function () {
+    const participantsInput = document.getElementById('participants').value.trim();
+    let participantsRaw = participantsInput.split('\n').map(p => p.trim()).filter(p => p !== '');
+
+    if (participantsRaw.length > 100) {
+        alert('Máximo 100 participantes permitidos.');
+        return;
+    }
+
+    const invalidNames = participantsRaw.filter(p => p.length > 50);
+    if (invalidNames.length > 0) {
+        alert('Algunos nombres superan los 50 caracteres. Corrige:\n\n' + invalidNames.join('\n'));
+        return;
+    }
+
+    // Numerar los participantes válidos
+    const participants = participantsRaw.map((p, i) => `${i + 1}. ${p}`);
+
     const teamCount = parseInt(document.getElementById('teamCount').value);
     const participantsPerTeam = parseInt(document.getElementById('participantsPerTeam').value);
     const teamTitle = document.getElementById('teamTitle').value;
-
-    const participants = participantsInput.split('\n').filter(p => p.length > 0 && p.length <= 50);
-    
-    if (participants.length > 100) {
-        alert('Máximo 100 participantes.');
-        return;
-    }
 
     if (teamCount <= 0 || participantsPerTeam <= 0) {
         alert('Por favor, selecciona la cantidad de equipos y participantes por equipo.');
@@ -20,6 +29,7 @@ document.getElementById('generateButton').addEventListener('click', function() {
     const teams = createTeams(shuffledParticipants, teamCount, participantsPerTeam);
 
     displayResults(teams, teamTitle);
+
 });
 
 function shuffleArray(array) {
