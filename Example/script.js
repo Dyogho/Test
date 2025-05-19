@@ -59,9 +59,91 @@ function displayResults(teams, title) {
     teams.forEach((team, index) => {
         const teamDiv = document.createElement('div');
         teamDiv.className = 'team';
-        teamDiv.innerHTML = `<h3>Equipo ${index + 1}</h3><p>${team.join(', ')}</p>`;
+        teamDiv.innerHTML = `<h3>Equipo ${index + 1}</h3><ul>${team.map(p => `<li>${p}</li>`).join('')}</ul>`;
         teamsDiv.appendChild(teamDiv);
     });
 
     resultDiv.classList.remove('hidden');
+}
+
+// 📸 Descargar JPG
+function descargarJPG() {
+    const equipos = document.querySelectorAll(".team");
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    const width = 800;
+    const lineHeight = 30;
+    const padding = 20;
+    const equipoSpacing = 50;
+    const totalHeight = equipos.length * (lineHeight * 6 + equipoSpacing) + padding * 2;
+
+    canvas.width = width;
+    canvas.height = totalHeight;
+
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#000000";
+    ctx.font = "20px Arial";
+
+    let y = padding;
+
+    equipos.forEach((equipo, index) => {
+        const nombreEquipo = `Equipo ${index + 1}`;
+        ctx.fillText(nombreEquipo, padding, y);
+        y += lineHeight;
+
+        const participantes = equipo.querySelectorAll("li");
+        participantes.forEach((p) => {
+            ctx.fillText(p.textContent, padding + 20, y);
+            y += lineHeight;
+        });
+
+        y += equipoSpacing;
+    });
+
+    const enlace = document.createElement("a");
+    enlace.download = "equipos.jpg";
+    enlace.href = canvas.toDataURL("image/jpeg");
+    enlace.click();
+}
+
+// 📋 Copiar al portapapeles (formato lista)
+function copiarAlPortapapeles() {
+    const equipos = document.querySelectorAll(".team");
+    let texto = "";
+
+    equipos.forEach((equipo, index) => {
+        texto += `Equipo ${index + 1}:\n`;
+        equipo.querySelectorAll("li").forEach(li => {
+            texto += `- ${li.textContent}\n`;
+        });
+        texto += "\n";
+    });
+
+    navigator.clipboard.writeText(texto)
+        .then(() => alert("¡Copiado al portapapeles!"))
+        .catch(() => alert("Error al copiar"));
+}
+
+// 🧾 Copiar equipos en columnas
+function copiarEquiposColumnas() {
+    const equipos = document.querySelectorAll(".team");
+    let columnas = [];
+
+    equipos.forEach(equipo => {
+        const participantes = Array.from(equipo.querySelectorAll("li")).map(li => li.textContent);
+        columnas.push(participantes);
+    });
+
+    const maxLength = Math.max(...columnas.map(col => col.length));
+    let resultado = "";
+
+    for (let i = 0; i < maxLength; i++) {
+        let fila = columnas.map(col => col[i] || "").join("\t");
+        resultado += fila + "\n";
+    }
+
+    navigator.clipboard.writeText(resultado)
+        .then(() => alert("¡Equipos copiados en columnas!"))
+        .catch(() => alert("Error al copiar columnas"));
 }
