@@ -1,65 +1,44 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portafolio de Desarrolladores</title>
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorteo de Equipos</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>👨‍💻 Portafolio de Desarrolladores</h1>
-      <p>Explora talentos digitales destacados</p>
-    </header>
-    
-    <div class="masked-banner"></div>
+    <div class="container">
+        <h1>Sorteo de Equipos</h1>
+        <textarea id="participants" placeholder="Ingresa los participantes (máx. 100, 50 caracteres cada uno)"></textarea>
+        
+        <label for="teamCount">Cantidad de Equipos:</label>
+        <select id="teamCount">
+            <option value="0">Seleccionar</option>
+            <option value="2">2 Equipos</option>
+            <option value="3">3 Equipos</option>
+            <option value="4">4 Equipos</option>
+        </select>
 
-    <main class="content">
-      <section class="profiles">
-        <a href="http://github.com/maria-diaz" target="_blank" class="card">
-          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Foto de perfil" />
-          <div>
-            <strong>María Díaz</strong><br />
-            UX Designer apasionada por la accesibilidad.
-          </div>
-        </a>
-        <a href="http://github.com/pedro-lopez" target="_blank" class="card">
-          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Foto de perfil" />
-          <div>
-            <strong>Pedro López</strong><br />
-            Fullstack Developer y mentor de estudiantes.
-          </div>
-        </a>
-        <a href="http://github.com/ana-torres" target="_blank" class="card">
-          <img src="https://randomuser.me/api/portraits/women/55.jpg" alt="Foto de perfil" />
-          <div>
-            <strong>Ana Torres</strong><br />
-            Desarrolladora Frontend y creadora de contenido.
-          </div>
-        </a>
-        <a href="http://github.com/juan-ramirez" target="_blank" class="card">
-          <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Foto de perfil" />
-          <div>
-            <strong>Juan Ramírez</strong><br />
-            DevOps y entusiasta de la automatización.
-          </div>
-        </a>
-        <a href="http://github.com/laura-gomez" target="_blank" class="card">
-          <img src="https://randomuser.me/api/portraits/women/22.jpg" alt="Foto de perfil" />
-          <div>
-            <strong>Laura Gómez</strong><br />
-            Project Manager con enfoque ágil.
-          </div>
-        </a>
-      </section>
-    </main>
+        <label for="participantsPerTeam">Participantes por Equipo:</label>
+        <select id="participantsPerTeam">
+            <option value="0">Seleccionar</option>
+            <option value="5">5 Participantes</option>
+            <option value="10">10 Participantes</option>
+            <option value="15">15 Participantes</option>
+        </select>
 
-    <footer>
-      <p>© 2025 - Portafolio de Desarrolladores</p>
-    </footer>
-  </div>
+        <input type="text" id="teamTitle" placeholder="Título para los equipos">
+        <button id="generateButton">Generar</button>
+    </div>
 
-  <script src="script.js"></script>
+    <div id="result" class="hidden">
+        <h2 id="resultTitle"></h2>
+        <div id="teams"></div>
+        <button id="downloadButton">Descargar JPG</button>
+        <button id="copyToClipboardButton">Copiar al Portapapeles</button>
+        <button id="copyTeamsButton">Copiar Equipos</button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
